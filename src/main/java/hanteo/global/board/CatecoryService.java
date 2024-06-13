@@ -11,5 +11,7 @@ public interface CatecoryService {
 
     public List<Category> findByName(String name);
 
+    public List<Category> findAll();
+
     public String toJson(Category category) throws Exception;
 }

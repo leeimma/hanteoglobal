@@ -14,8 +14,6 @@ public class CategoryMemoryRepository {
     // 메모리 저장
     private static final Map<Integer, Category> categories = new HashMap<>();
 
-    // 시퀀스...
-    private static int sequence = 0;
 
     /**
      * 카테고리 저장
@@ -36,14 +34,6 @@ public class CategoryMemoryRepository {
                 }
             }
         }
-    }
-
-    /**
-     * 카테고리 저장
-     * @param category
-     */
-    public void addCategory(Category category) {
-        categories.put(category.getId(), category);
     }
 
     /**

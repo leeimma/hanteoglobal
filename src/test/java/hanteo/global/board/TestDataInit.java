@@ -14,11 +14,12 @@ public class TestDataInit {
     private final CatecoryService categoryService;
 
     /**
-     * 확인용 초기 데이터 추가
+     * 확인용 초기 데이터
      */
     @EventListener(ApplicationReadyEvent.class)
     public void initData() {
         log.info("test data init");
+
         // 최상위 카테고리 추가
         categoryService.save(100, "남자", null);
         categoryService.save(200, "여자", null);

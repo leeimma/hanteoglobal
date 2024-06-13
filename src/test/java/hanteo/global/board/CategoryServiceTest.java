@@ -1,7 +1,6 @@
 package hanteo.global.board;
 
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,13 +9,15 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 @Slf4j
 @SpringBootTest
 class CategoryServiceTest {
 
     @Autowired
-    CategoryMemoryService categoryService;
+    private CatecoryService categoryService;
 
     @TestConfiguration
     static class InitTxTestConfig {
@@ -26,26 +27,37 @@ class CategoryServiceTest {
         }
     }
 
-
-    @Test
-    void FindAll() {
-        List<Category> categories = categoryService.findAll();
-        ListLog(categories);
-    }
-
     @Test
     void idToJson() throws Exception {
         Category categoryById = categoryService.findById(100).get();
         String json = categoryService.toJson(categoryById);
         log.info("카테고리 검색 및 json = {} ", json);
 
-        Assertions.assertThat(categoryById.getName())
-                .isEqualTo("남자");
+        assertThat(categoryById.getName()).isEqualTo("남자");
     }
 
     @Test
     void nameToJson() {
         List<Category> categories = categoryService.findByName("익명게시판");
+
+        assertThat(categories.get(0).getId()).isEqualTo(6);
+
+        ListLog(categories);
+    }
+
+    @Test
+    void nameToJson2() {
+        List<Category> categories = categoryService.findByName("공지사항");
+
+        assertThat(categories.size()).isEqualTo(3);
+
+        ListLog(categories);
+    }
+
+
+    //    @Test
+    void FindAll() {
+        List<Category> categories = categoryService.findAll();
         ListLog(categories);
     }
 
